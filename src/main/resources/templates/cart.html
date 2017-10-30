@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Phone</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    </head>
+<body>
+    <table>
+        <tr>
+            <th>Produs</th>
+        </tr>
+        <tr th:each="item : ${cart}">
+            <td th:text="${item.denumire}"></td>
+            <td th:text="${item.pretul}"></td>
+            <td>
+                <button class="btn btn-danger">
+                    <a th:href="@{/removeToCart(id=${item.id})}"><span class="glyphicon glyphicon-remove"></span></a>
+                </button>
+                <button class=" btn btn-default"><a th:href="@{/}">Home</a></button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Phone</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<h3>
+    <span sec:authentication="name"></span> has <span sec:authentication="authorities"></span>
+</h3>
+<div>
+    <form method="post" th:action="@{/logout}">
+        <input value="Exit" type="submit"/>
+    </form>
+</div>
+
+<div class = "container">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <button type="button" class="btn btn-success"><a th:href="@{'/edit/0'}"><span class="glyphicon glyphicon-plus"></span></a></button>
+        <button class=" btn btn-default"><a th:href="@{/cart}"><span class="glyphicon glyphicon glyphicon-eye-open"></span><span class="glyphicon glyphicon-shopping-cart"></span></a></button>
+        <table class="table table-striped">
+            <thead class="info">
+            <tr>
+                <th>ID</th>
+                <th>Denumire</th>
+                <th>Producator</th>
+                <th>Model</th>
+                <th>Pretul</th>
+                <th colspan="4" align="center">Action</th>
+            </tr>
+            </thead>
+            <tr th:each="telefon : ${telefons}">
+                <td th:text="${telefon.id}"></td>
+                <td th:text="${telefon.denumire}"></td>
+                <td th:text="${telefon.producator}"></td>
+                <td th:text="${telefon.model}"></td>
+                <td th:text="${telefon.pretul}"></td>
+                <td><button type="button" class="btn btn-info"><a th:href="@{'/view/' + ${telefon.id}}"><span class="glyphicon glyphicon-eye-open"></span></a></button></td>
+                <td><button type="button" class="btn btn-warning"><a th:href="@{'/edit/' + ${telefon.id}}"><span class="glyphicon glyphicon-edit"></span></a></button></td>
+                <td><button type="button" class="btn btn-danger" onclick="return confirm('Esti increzut ca doresti sa stergi?')"><a th:href="@{'/delete/' + ${telefon.id}}"><span class="glyphicon glyphicon-remove"></span></a></button></td>
+                <td><button class="btn btn-default"><a th:href="@{'/addToCart/' + ${telefon.id}}"><span class="glyphicon glyphicon-shopping-cart"></span></a></button></td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+
+</body>
+</html>
